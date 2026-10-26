@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Bangi",
+    "slug": "bangi",
+    "scheme": "bangi",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "plugins": ["expo-router", "expo-font"],
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "name": "Bangi",
+      "shortName": "Bangi"
+    },
+    "icon": "./assets/icon.png"
+  }
+}

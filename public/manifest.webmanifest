@@ -1,0 +1,32 @@
+{
+  "id": "/",
+  "name": "Bangi · Prayer & Qibla",
+  "short_name": "Bangi",
+  "description": "A peaceful, private prayer companion that works offline.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B2823",
+  "theme_color": "#0B2823",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
