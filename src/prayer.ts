@@ -6,6 +6,7 @@ import {
   PrayerTimes,
   Qibla,
 } from "adhan";
+import { namaadhuSchedule } from "./maldives";
 import { DateTime } from "luxon";
 export const prayers = ["fajr", "dhuhr", "asr", "maghrib", "isha"] as const;
 export type Prayer = (typeof prayers)[number];
@@ -22,6 +23,7 @@ export const methods = [
   "Egyptian",
   "Karachi",
   "NorthAmerica",
+  "NamaadhuVaguthu",
 ] as const;
 export type Method = (typeof methods)[number];
 export type Place = {
@@ -31,14 +33,18 @@ export type Place = {
   latitude: number;
   longitude: number;
   timezone: string;
+  namaadhuIslandId?: number;
 };
 export type Calculation = {
   method: Method;
   hanafi: boolean;
   highLatitude: "middle" | "seventh" | "angle";
   adjustments: Record<Prayer, number>;
+  namaadhuAdjustments?: Record<Prayer, number>;
 };
 export function schedule(place: Place, day: string, settings: Calculation) {
+  if (settings.method === "NamaadhuVaguthu")
+    return namaadhuSchedule(place, day, settings);
   const p = CalculationMethod[settings.method]();
   p.madhab = settings.hanafi ? Madhab.Hanafi : Madhab.Shafi;
   p.highLatitudeRule = {
@@ -90,3 +96,12 @@ export const relativeBearing = (target: number, heading: number) =>
   ((target - heading + 540) % 360) - 180;
 export const formatTime = (date: Date, zone: string) =>
   DateTime.fromJSDate(date).setZone(zone).toFormat("HH:mm");
+
+export const methodLabel = (method: Method) =>
+  method === "NamaadhuVaguthu"
+    ? "Namaadhu Vaguthu (Maldives timetable)"
+    : method;
+export const methodDetail = (settings: Calculation) =>
+  settings.method === "NamaadhuVaguthu"
+    ? "Namaadhu Vaguthu · published island timetable"
+    : `${settings.method} · ${settings.hanafi ? "Hanafi" : "Standard"} Asr`;

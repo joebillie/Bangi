@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import { Settings } from "./settings";
-import { localDay, schedule } from "./prayer";
+import { namaadhuUnavailable } from "./maldives";
+import { localDay, schedule, methodDetail } from "./prayer";
 const escape = (s: string) =>
   s
     .replace(/\\/g, "\\\\")
@@ -12,6 +13,10 @@ const stamp = (date: Date) =>
 export function calendarExport(s: Settings, now = new Date(), days = 30) {
   if (!s.location)
     throw Error("Select a location before exporting prayer times.");
+  if (namaadhuUnavailable(s.location, s.calculation))
+    throw Error(
+      "Choose a Namaadhu Vaguthu island in calculation settings before exporting.",
+    );
   const place = s.location;
   const lines = [
     "BEGIN:VCALENDAR",
@@ -37,7 +42,7 @@ export function calendarExport(s: Settings, now = new Date(), days = 30) {
         `DTEND:${stamp(new Date(+p.time + 15 * 60000))}`,
         `SUMMARY:${title}`,
         `LOCATION:${escape([place.name, place.region, place.country].filter(Boolean).join(", "))}`,
-        `DESCRIPTION:${escape("Prayer time calculated with " + s.calculation.method + ". Imported calendar reminders do not update automatically when Bangi settings change.")}`,
+        `DESCRIPTION:${escape("Prayer time source: " + methodDetail(s.calculation) + ". Imported calendar reminders do not update automatically when Bangi settings change.")}`,
       );
       const reminder = s.reminders[p.name];
       if (reminder.enabled)

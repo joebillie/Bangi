@@ -34,6 +34,7 @@ export const defaults: Settings = {
     hanafi: false,
     highLatitude: "angle",
     adjustments: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 },
+    namaadhuAdjustments: { fajr: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 },
   },
   notifications: false,
   reminders: Object.fromEntries(
@@ -96,6 +97,10 @@ export function restore(raw: string | null): Settings {
     calculation: {
       ...defaults.calculation,
       ...v.calculation,
+      namaadhuAdjustments: {
+        ...defaults.calculation.namaadhuAdjustments,
+        ...v.calculation?.namaadhuAdjustments,
+      },
       adjustments: {
         ...defaults.calculation.adjustments,
         ...v.calculation?.adjustments,
@@ -117,6 +122,7 @@ export function restore(raw: string | null): Settings {
       "Egyptian",
       "Karachi",
       "NorthAmerica",
+      "NamaadhuVaguthu",
     ].includes(out.calculation.method)
   )
     out.calculation.method = defaults.calculation.method;
@@ -138,6 +144,12 @@ export function restore(raw: string | null): Settings {
           ].slice(0, 4)
         : [0],
     };
+    if (
+      out.calculation.namaadhuAdjustments &&
+      (!Number.isInteger(out.calculation.namaadhuAdjustments[p]) ||
+        Math.abs(out.calculation.namaadhuAdjustments[p]) > 120)
+    )
+      out.calculation.namaadhuAdjustments[p] = 0;
     if (
       !Number.isFinite(out.calculation.adjustments[p]) ||
       Math.abs(out.calculation.adjustments[p]) > 120

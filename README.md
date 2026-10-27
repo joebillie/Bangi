@@ -24,7 +24,7 @@ npm run serve         # Production build locally, port 4173
 
 Deploy **`dist/`** to an HTTPS static host. For root-level hosting leave `EXPO_PUBLIC_BASE_PATH` unset; GitHub Pages project hosting is configured separately below. Serve `sw.js` with JavaScript MIME type and `Cache-Control: no-cache`; serve `manifest.webmanifest` as `application/manifest+json`. Navigation routes need their exported HTML files or a fallback to `index.html`. An example Netlify configuration is included; other static hosts work too. `npm run serve` is a local validation server, not a public TLS/reverse-proxy deployment.
 
-Development intentionally does **not** register the service worker, so cached assets cannot hide code changes. Test offline behavior with `npm run build` followed by `npm run serve`. New PWA versions activate after old pages close; reopen Bangi online to get updates. Settings live outside the service-worker cache and survive cache version changes.
+Development intentionally does **not** register the service worker, so cached assets cannot hide code changes. Test offline behavior with `npm run build` followed by `npm run serve`. New PWA versions activate after their full offline cache is ready; reopen or reload Bangi online to get updated screens. Open pages keep their current UI until reloaded. Settings live outside the service-worker cache and survive cache version changes.
 
 The cloud machine needs a writable npm cache: `npm --cache /tmp/bangi-npm ci`. Use `EXPO_NO_TELEMETRY=1` for Expo commands here. On ordinary developer machines these overrides are unnecessary. No environment secrets are required; optional `PORT` changes the local production-server port, and `BANGI_CHROMIUM_PATH` overrides the test browser executable.
 
@@ -62,7 +62,7 @@ Compass heading requires a supported **absolute** orientation source. Relative a
 
 Calculations, coordinate-to-time-zone lookup (`tz-lookup`), magnetic declination (`geomagnetism`) and settings stay on device. Browser geolocation is provided by the OS/browser; no coordinates are sent by Bangi to a geocoder. Online city search sends only search text to `geocoding-api.open-meteo.com` (Open-Meteo / GeoNames). No analytics, account, push subscription or backend is used.
 
-The cloud environment initially denied Open-Meteo access. Its hostname was added to the saved network draft; review/save the environment settings and publish to activate it. Saving a draft does not prove live connectivity. Offline city and coordinate entry work independently. A public website user's connectivity is determined by that user's browser/network, separately from the cloud build environment.
+Restricted cloud tasks need `geocoding-api.open-meteo.com` for online city search. Maintaining the Namaadhu Vaguthu snapshot additionally needs `namaadhuvaguthu.com` and the public dataset host; the installed app does not fetch that snapshot at runtime. Offline city, coordinate and timetable selection work independently. A public website user's connectivity is determined by that user's browser/network, separately from the cloud build environment.
 
 ## Structure
 
@@ -95,7 +95,7 @@ React/TypeScript with Expo Router and React Native Web provide the responsive UI
 ## Verification
 
 ```sh
-npm test            # 24 actual logic/service cases, not just file-load checks
+npm test            # 77 actual logic/service cases, not just file-load checks
 npm run typecheck
 npm run lint
 npm run test:e2e    # Interactive browser workflows, dev server
@@ -116,3 +116,11 @@ Before a public release, verify on a real iPhone: Add to Home Screen and standal
 `.github/workflows/deploy.yml` builds, validates and publishes on pushes to `main`. It uses the repository's GitHub token (no application API keys). For GitHub Pages project hosting, it sets `EXPO_PUBLIC_BASE_PATH=/Bangi`, which scopes navigation, assets, the manifest and offline cache to that path. On other root-level hosts leave the variable unset.
 
 Enable Pages once in the repository's **Settings → Pages → Source: GitHub Actions**, then rerun **Deploy Bangi web app**. Repository/organization policy or private-repository plan restrictions can prevent Pages hosting. A workflow file or successful push alone does not establish that the site is live; verify the deployment and HTTPS address before installing it on iPhone.
+
+## Namaadhu Vaguthu source (Maldives)
+
+Open **Settings → Prayer calculation → Namaadhu Vaguthu (Maldives timetable)**, then search for and select the exact island. This source uses the published island timetable instead of recomputing times with a generic astronomical method. It includes 202 islands and works offline. Malé's published times for 27 October 2026 are Fajr 04:36, Sunrise 05:49, Dhuhr 11:54, Asr 15:11, Maghrib 17:52 and Isha 19:04.
+
+The stored data was verified directly against 47 provider timetables covering all 42 latitude bands, seasonal dates, leap day, and positive/negative island corrections. See [dataset provenance and maintenance](src/data/README.md). The app labels it as a snapshot, links to the original website, and keeps source-specific manual adjustments separate and initially zero. Existing Hanafi/high-latitude preferences and other-method adjustments remain saved but do not alter the published source times.
+
+Choosing this source requires choosing an explicit Maldives timetable island. Changing to an unsupported city clears the displayed source schedule and planned reminders, with a prompt to select a supported island or another calculation method. There is no silent fallback. Calendar exports, countdowns and reminders use the same selected source. Existing imported calendar files must be replaced separately if you switch sources.

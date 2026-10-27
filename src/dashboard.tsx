@@ -3,6 +3,7 @@ import { View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 import { router } from "expo-router";
 import { DateTime } from "luxon";
+import { SourceNotice } from "./source-notice";
 import { PwaStatus } from "./pwa";
 import { Icon } from "./icon";
 import { useApp } from "./store";
@@ -13,6 +14,7 @@ import {
   nextPrayer,
   Prayer,
   schedule,
+  methodDetail,
 } from "./prayer";
 import { Button, Card, Choices, Row, Screen, Txt } from "./ui";
 export function useClock() {
@@ -53,6 +55,7 @@ export function Dashboard() {
       <Screen title="Welcome to Bangi">
         <Ornament />
         <PwaStatus />
+        <SourceNotice />
         <Card>
           <Txt size={23} color={p.heading}>
             Your day, guided by prayer.
@@ -96,6 +99,7 @@ export function Dashboard() {
   return (
     <Screen title="Assalamu alaikum">
       <PwaStatus />
+      <SourceNotice />
       <Row>
         <View style={{ flex: 1 }}>
           <Txt size={20} color={p.heading}>
@@ -145,7 +149,9 @@ export function Dashboard() {
         <Txt color={p.headerText}>
           {next
             ? `${next.name[0].toUpperCase() + next.name.slice(1)} at ${formatTime(next.time, place.timezone)}`
-            : "Try another high-latitude rule; the sun may not cross the required angle."}
+            : s.calculation.method === "NamaadhuVaguthu"
+              ? "Choose a supported timetable island in calculation settings."
+              : "Try another high-latitude rule; the sun may not cross the required angle."}
         </Txt>
       </View>
       <Row>
@@ -173,9 +179,10 @@ export function Dashboard() {
           <Button label="Open Qibla ↗" onPress={() => router.push("/qibla")} />
         </Row>
         <Txt size={13} color={p.secondaryAccent}>
-          {s.calculation.method} ·{" "}
-          {s.calculation.hanafi ? "Hanafi" : "Standard"} Asr · Calculated
-          offline with Adhan
+          {methodDetail(s.calculation)} ·{" "}
+          {s.calculation.method === "NamaadhuVaguthu"
+            ? "Stored timetable"
+            : "Calculated offline with Adhan"}
         </Txt>
         <Button
           label="Calculation settings"

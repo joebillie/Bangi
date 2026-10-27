@@ -2,7 +2,8 @@ import { useState } from "react";
 import { DateTime } from "luxon";
 import { router } from "expo-router";
 import { useApp } from "../../src/store";
-import { localDay, schedule } from "../../src/prayer";
+import { SourceNotice } from "../../src/source-notice";
+import { localDay, schedule, methodDetail } from "../../src/prayer";
 import { PrayerSchedule, useClock } from "../../src/dashboard";
 import { Button, Card, Choices, Row, Screen, Txt } from "../../src/ui";
 export default function Times() {
@@ -13,6 +14,7 @@ export default function Times() {
   if (!place)
     return (
       <Screen title="Prayer times">
+        <SourceNotice />
         <Txt>Choose a city to calculate your prayer schedule.</Txt>
         <Button
           label="Choose your location"
@@ -26,6 +28,7 @@ export default function Times() {
   const entries = schedule(place, day, s.calculation);
   return (
     <Screen title="Prayer times">
+      <SourceNotice />
       <Card>
         <Txt size={23} color={p.heading}>
           {place.name}, {place.country}
@@ -36,8 +39,7 @@ export default function Times() {
             .toFormat("cccc, d LLLL yyyy")}
         </Txt>
         <Txt size={13} color={p.secondaryText}>
-          {place.timezone} · {s.calculation.method} ·{" "}
-          {s.calculation.hanafi ? "Hanafi" : "Standard"} Asr
+          {place.timezone} · {methodDetail(s.calculation)}
         </Txt>
         <Row>
           <Button
@@ -75,8 +77,10 @@ export default function Times() {
         onPress={() => router.push("/calculation")}
       />
       <Txt size={12}>
-        Times are calculated offline for this date. Browsing a different date
-        does not change your reminder schedule.
+        {s.calculation.method === "NamaadhuVaguthu"
+          ? "Published timetable values are stored offline for this month/day."
+          : "Times are calculated offline for this date."}{" "}
+        Browsing a different date does not change your reminder schedule.
       </Txt>
     </Screen>
   );

@@ -1,0 +1,334 @@
+{
+  "verifiedOn": "2026-10-27",
+  "checks": [
+    {
+      "islandId": 952,
+      "date": "2026-10-27",
+      "times": ["04:34", "05:45", "11:56", "15:11", "17:57", "19:10"],
+      "heading": "Meedhoo, Addu City",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/952/2026/10/27"
+    },
+    {
+      "islandId": 951,
+      "date": "2026-10-27",
+      "times": ["04:33", "05:45", "11:55", "15:10", "17:56", "19:09"],
+      "heading": "Gn. Fuvahmulah",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/951/2026/10/27"
+    },
+    {
+      "islandId": 901,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:47", "11:57", "15:12", "17:58", "19:10"],
+      "heading": "GDh. Nadellaa",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/901/2026/10/27"
+    },
+    {
+      "islandId": 899,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:48", "11:57", "15:12", "17:57", "19:10"],
+      "heading": "GDh. Madaveli",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/899/2026/10/27"
+    },
+    {
+      "islandId": 829,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:47", "11:56", "15:11", "17:56", "19:09"],
+      "heading": "GA. Dhevvadhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/829/2026/10/27"
+    },
+    {
+      "islandId": 824,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:47", "11:56", "15:11", "17:56", "19:09"],
+      "heading": "GA. Kolamaafushi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/824/2026/10/27"
+    },
+    {
+      "islandId": 768,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:48", "11:56", "15:12", "17:55", "19:08"],
+      "heading": "L. Maavah",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/768/2026/10/27"
+    },
+    {
+      "islandId": 762,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:47", "11:55", "15:11", "17:54", "19:07"],
+      "heading": "L. Isdhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/762/2026/10/27"
+    },
+    {
+      "islandId": 701,
+      "date": "2026-10-27",
+      "times": ["04:37", "05:49", "11:57", "15:13", "17:56", "19:09"],
+      "heading": "Th. Kandoodhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/701/2026/10/27"
+    },
+    {
+      "islandId": 696,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:49", "11:56", "15:12", "17:55", "19:08"],
+      "heading": "Th. Buruni",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/696/2026/10/27"
+    },
+    {
+      "islandId": 659,
+      "date": "2026-10-27",
+      "times": ["04:37", "05:50", "11:57", "15:13", "17:55", "19:08"],
+      "heading": "Dh. Gemendhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/659/2026/10/27"
+    },
+    {
+      "islandId": 655,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:57", "15:13", "17:55", "19:08"],
+      "heading": "Dh. Meedhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/655/2026/10/27"
+    },
+    {
+      "islandId": 634,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:57", "15:13", "17:55", "19:08"],
+      "heading": "F. Biledhdhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/634/2026/10/27"
+    },
+    {
+      "islandId": 633,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:57", "15:13", "17:55", "19:08"],
+      "heading": "F. Feeali",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/633/2026/10/27"
+    },
+    {
+      "islandId": 600,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:47", "11:54", "15:11", "17:52", "19:05"],
+      "heading": "M. Raimandhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/600/2026/10/27"
+    },
+    {
+      "islandId": 606,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:48", "11:55", "15:11", "17:53", "19:06"],
+      "heading": "M. Kolhufushi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/606/2026/10/27"
+    },
+    {
+      "islandId": 602,
+      "date": "2026-10-27",
+      "times": ["04:35", "05:47", "11:54", "15:11", "17:52", "19:05"],
+      "heading": "M. Veyvah",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/602/2026/10/27"
+    },
+    {
+      "islandId": 585,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:48", "11:55", "15:11", "17:53", "19:05"],
+      "heading": "V. Rakeedhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/585/2026/10/27"
+    },
+    {
+      "islandId": 581,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:48", "11:55", "15:11", "17:53", "19:05"],
+      "heading": "V. Fulidhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/581/2026/10/27"
+    },
+    {
+      "islandId": 540,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:57", "15:13", "17:55", "19:07"],
+      "heading": "Adh. Dhangethi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/540/2026/10/27"
+    },
+    {
+      "islandId": 535,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:57", "15:13", "17:55", "19:07"],
+      "heading": "Adh. Hangnameedhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/535/2026/10/27"
+    },
+    {
+      "islandId": 507,
+      "date": "2026-10-27",
+      "times": ["04:39", "05:51", "11:58", "15:14", "17:55", "19:08"],
+      "heading": "AA. Feridhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/507/2026/10/27"
+    },
+    {
+      "islandId": 503,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:56", "15:13", "17:54", "19:06"],
+      "heading": "AA. Rasdhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/503/2026/10/27"
+    },
+    {
+      "islandId": 502,
+      "date": "2026-10-27",
+      "times": ["04:39", "05:51", "11:57", "15:13", "17:54", "19:06"],
+      "heading": "AA. Thoddoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/502/2026/10/27"
+    },
+    {
+      "islandId": 424,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:49", "11:54", "15:11", "17:52", "19:04"],
+      "heading": "K. Gulhi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/424/2026/10/27"
+    },
+    {
+      "islandId": 420,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:48", "11:54", "15:11", "17:51", "19:04"],
+      "heading": "K. Dhiffushi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/420/2026/10/27"
+    },
+    {
+      "islandId": 419,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:49", "11:54", "15:11", "17:51", "19:04"],
+      "heading": "K. Gaafaru",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/419/2026/10/27"
+    },
+    {
+      "islandId": 418,
+      "date": "2026-10-27",
+      "times": ["04:37", "05:49", "11:55", "15:12", "17:51", "19:04"],
+      "heading": "K. Kaashidhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/418/2026/10/27"
+    },
+    {
+      "islandId": 415,
+      "date": "2026-10-27",
+      "times": ["04:36", "05:49", "11:54", "15:11", "17:52", "19:04"],
+      "heading": "Male', Male' City",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/415/2026/10/27"
+    },
+    {
+      "islandId": 368,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:55", "15:12", "17:51", "19:04"],
+      "heading": "Lh. Hinnavaru",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/368/2026/10/27"
+    },
+    {
+      "islandId": 300,
+      "date": "2026-10-27",
+      "times": ["04:40", "05:51", "11:57", "15:14", "17:54", "19:06"],
+      "heading": "B. Thulhaadhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/300/2026/10/27"
+    },
+    {
+      "islandId": 290,
+      "date": "2026-10-27",
+      "times": ["04:39", "05:51", "11:56", "15:13", "17:53", "19:05"],
+      "heading": "B. Kudarikilu",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/290/2026/10/27"
+    },
+    {
+      "islandId": 204,
+      "date": "2026-10-27",
+      "times": ["04:40", "05:52", "11:57", "15:14", "17:53", "19:05"],
+      "heading": "R. Gaaudoodhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/204/2026/10/27"
+    },
+    {
+      "islandId": 208,
+      "date": "2026-10-27",
+      "times": ["04:40", "05:52", "11:57", "15:14", "17:53", "19:05"],
+      "heading": "R. Rasmaadhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/208/2026/10/27"
+    },
+    {
+      "islandId": 200,
+      "date": "2026-10-27",
+      "times": ["04:40", "05:52", "11:57", "15:14", "17:52", "19:05"],
+      "heading": "R. Alifushi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/200/2026/10/27"
+    },
+    {
+      "islandId": 139,
+      "date": "2026-10-27",
+      "times": ["04:39", "05:51", "11:56", "15:13", "17:51", "19:04"],
+      "heading": "N. Holhudhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/139/2026/10/27"
+    },
+    {
+      "islandId": 128,
+      "date": "2026-10-27",
+      "times": ["04:38", "05:50", "11:55", "15:12", "17:51", "19:04"],
+      "heading": "N. Henbandhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/128/2026/10/27"
+    },
+    {
+      "islandId": 85,
+      "date": "2026-10-27",
+      "times": ["04:40", "05:51", "11:56", "15:13", "17:52", "19:04"],
+      "heading": "Sh. Maroshi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/85/2026/10/27"
+    },
+    {
+      "islandId": 76,
+      "date": "2026-10-27",
+      "times": ["04:41", "05:52", "11:57", "15:14", "17:52", "19:05"],
+      "heading": "Sh. Kanditheemu",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/76/2026/10/27"
+    },
+    {
+      "islandId": 57,
+      "date": "2026-10-27",
+      "times": ["04:41", "05:54", "11:58", "15:15", "17:53", "19:06"],
+      "heading": "HDh. Makunudhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/57/2026/10/27"
+    },
+    {
+      "islandId": 41,
+      "date": "2026-10-27",
+      "times": ["04:40", "05:52", "11:56", "15:13", "17:51", "19:04"],
+      "heading": "HDh. Faridhoo",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/41/2026/10/27"
+    },
+    {
+      "islandId": 1,
+      "date": "2026-10-27",
+      "times": ["04:41", "05:53", "11:57", "15:14", "17:52", "19:05"],
+      "heading": "HA. Thuraakunu",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/1/2026/10/27"
+    },
+    {
+      "islandId": 415,
+      "date": "2026-01-01",
+      "times": ["04:54", "06:11", "12:13", "15:34", "18:08", "19:25"],
+      "heading": "Male', Male' City",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/415/2026/01/01"
+    },
+    {
+      "islandId": 415,
+      "date": "2026-07-01",
+      "times": ["04:39", "05:57", "12:14", "15:37", "18:22", "19:41"],
+      "heading": "Male', Male' City",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/415/2026/07/01"
+    },
+    {
+      "islandId": 415,
+      "date": "2024-02-29",
+      "times": ["05:04", "06:16", "12:23", "15:36", "18:21", "19:33"],
+      "heading": "Male', Male' City",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/415/2024/02/29"
+    },
+    {
+      "islandId": 1,
+      "date": "2026-01-01",
+      "times": ["05:02", "06:18", "12:16", "15:35", "18:06", "19:24"],
+      "heading": "HA. Thuraakunu",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/1/2026/01/01"
+    },
+    {
+      "islandId": 371,
+      "date": "2026-07-01",
+      "times": ["04:37", "05:54", "12:14", "15:37", "18:24", "19:43"],
+      "heading": "Lh. Olhuvelifushi",
+      "sourceUrl": "https://namaadhuvaguthu.com/en/prayertimes/371/2026/07/01"
+    }
+  ]
+}

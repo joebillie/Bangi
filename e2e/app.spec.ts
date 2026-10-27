@@ -124,3 +124,50 @@ test("country switching, calculation editing, theme validation and large RTL lay
   await page.screenshot({ path: "/tmp/bangi-tablet-rtl.png" });
   expect(errors).toEqual([]);
 });
+
+test("Namaadhu Vaguthu island source survives restart and refuses unsupported countries", async ({
+  page,
+}) => {
+  await page.clock.setFixedTime(new Date("2026-10-27T00:00:00Z"));
+  await page.goto("/calculation");
+  await page
+    .getByRole("button", {
+      name: "Namaadhu Vaguthu (Maldives timetable)",
+      exact: true,
+    })
+    .click();
+  await expect(
+    page.getByText("Maldives timetable island", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("switch", { name: "Hanafi Asr (double shadow)" }),
+  ).toHaveCount(0);
+  await page
+    .getByRole("button", { name: "Use Malé · Malé City (T10)", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "View prayer times", exact: true })
+    .click();
+  await expect(page.getByText("Malé", { exact: true })).toBeVisible();
+  for (const time of ["04:36", "05:49", "11:54", "15:11", "17:52", "19:04"])
+    await expect(page.getByText(time, { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByText("Malé", { exact: true })).toBeVisible();
+  await page.goto("/reminders");
+  const download = page.waitForEvent("download");
+  await page
+    .getByRole("button", { name: "Export 30 days to calendar", exact: true })
+    .click();
+  expect((await download).suggestedFilename()).toBe("bangi-prayer-times.ics");
+  await page.goto("/location");
+  await page
+    .getByRole("button", { name: "London, United Kingdom", exact: true })
+    .click();
+  await expect(
+    page.getByText(/This source does not cover other countries/),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Choose timetable island", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText("04:36", { exact: true })).toHaveCount(0);
+});
