@@ -11,8 +11,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - run: npm run check:backend
+      - run: npm run build:backend
       - run: npm run lint
       - run: npm test
       - run: npm run build:web
         env:
           EXPO_NO_TELEMETRY: "1"
+
+      - run: npm run test:worker

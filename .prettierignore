@@ -1,2 +1,4 @@
 # Generated compact timetable data; regenerate through its importer.
 src/data/maldives-timetable.json
+
+backend-dist/

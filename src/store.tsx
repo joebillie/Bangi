@@ -9,6 +9,7 @@ import React, {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AppState, useColorScheme } from "react-native";
 import { defaults, Settings } from "./settings";
+import { syncBackgroundPush } from "./background-push";
 import { syncNotifications } from "./notifications";
 import { refreshAutomaticLocation } from "./location";
 import { Palette, textScale } from "./theme";
@@ -67,16 +68,23 @@ export function Provider({ children }: { children: React.ReactNode }) {
   }, []);
   useEffect(() => {
     if (!ready) return;
-    const sync = () =>
-      syncNotifications(latest.current).catch((e) => setError(e.message));
+    const sync = async () => {
+      await syncNotifications(latest.current).catch((e) => setError(e.message));
+      await syncBackgroundPush(latest.current).catch((e) =>
+        setError(e.message),
+      );
+    };
     void sync();
     const sub = AppState.addEventListener("change", (state) => {
       if (state === "active") void sync();
     });
+    if (typeof window !== "undefined") window.addEventListener("online", sync);
     const interval = setInterval(sync, 3600000);
     return () => {
       sub.remove();
       clearInterval(interval);
+      if (typeof window !== "undefined")
+        window.removeEventListener("online", sync);
     };
   }, [
     ready,

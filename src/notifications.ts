@@ -1,3 +1,4 @@
+import { backgroundPushEnabled } from "./background-push";
 import { assetUrl } from "./urls";
 import { Settings } from "./settings";
 import { planReminders, PlannedReminder } from "./reminders";
@@ -43,6 +44,7 @@ async function deliver(item: PlannedReminder) {
       detail: `${title} — A moment to pause, reflect, and pray.`,
     }),
   );
+  if (backgroundPushEnabled()) return; // The server push owns system alerts and sound while connected.
   if (item.sound) {
     try {
       const context = audioContext();

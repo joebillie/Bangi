@@ -171,3 +171,27 @@ test("Namaadhu Vaguthu island source survives restart and refuses unsupported co
   ).toBeVisible();
   await expect(page.getByText("04:36", { exact: true })).toHaveCount(0);
 });
+
+test("background push stays disconnected without a deployed service and sends no prayer data", async ({
+  page,
+}) => {
+  const cloudRequests: string[] = [];
+  page.on("request", (request) => {
+    if (request.url().includes(".supabase.co"))
+      cloudRequests.push(request.url());
+  });
+  await page.goto("/reminders");
+  await expect(
+    page.getByText(
+      "Background notifications are not connected to a backend yet.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Enable background notifications",
+      exact: true,
+    }),
+  ).toBeDisabled();
+  expect(cloudRequests).toEqual([]);
+});

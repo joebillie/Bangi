@@ -14,10 +14,15 @@
     "format": "prettier --write app src tests e2e *.ts *.json *.js",
     "build": "expo export --platform web && node scripts/build-pwa.mjs",
     "serve": "node scripts/serve.mjs",
-    "test:pwa": "playwright test --config playwright.pwa.config.ts"
+    "test:pwa": "playwright test --config playwright.pwa.config.ts",
+    "check:backend": "tsc --noEmit --project backend/tsconfig.json",
+    "build:backend": "node scripts/build-backend.mjs",
+    "deploy:backend": "node --use-env-proxy scripts/deploy-backend.mjs",
+    "test:worker": "node --test --experimental-test-isolation=none tests/push-worker.test.mjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",
+    "@supabase/supabase-js": "^2.118.0",
     "adhan": "4.4.6",
     "expo": "~54.0.38",
     "expo-constants": "~18.0.14",
@@ -37,14 +42,18 @@
     "tz-lookup": "^6.1.25"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.12",
     "@playwright/test": "^1.64.1",
     "@types/luxon": "^3.7.1",
     "@types/react": "~19.1.10",
     "@types/tz-lookup": "^6.1.2",
+    "@types/web-push": "^3.6.4",
+    "esbuild": "^0.28.2",
     "eslint": "^9.39.5",
     "eslint-config-expo": "~10.0.0",
     "prettier": "^3.9.10",
     "tsx": "^4.21.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "web-push": "^3.6.7"
   }
 }

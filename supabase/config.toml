@@ -1,0 +1,5 @@
+project_id = "bangi"
+[functions.prayer-push]
+verify_jwt = false
+# The handler validates installation JWTs itself; only /config and /health are public.
+# /dispatch requires the independent cron secret and never accepts browser credentials.

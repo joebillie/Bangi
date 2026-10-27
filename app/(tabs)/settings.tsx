@@ -62,13 +62,17 @@ export default function Settings() {
           Prayer times use Adhan’s astronomical calculations on your device.
           Location search uses Open-Meteo and GeoNames. Automatic location uses
           your browser’s geolocation service; coordinates stay on this device.
-          No account, tracking, or backend is required.
+          Core features work locally. Optional background notifications use an
+          anonymous server installation and store only the prayer location,
+          calculation/source, reminder settings and push subscription after you
+          opt in.
         </Txt>
         <Txt>
           Install from Safari with Share → Add to Home Screen. Prayer times and
           preferences work offline after the first load. Live compass access
-          depends on Safari permissions. Reminders work while Bangi is open;
-          export to a calendar for alerts outside the app.
+          depends on Safari permissions. Foreground reminders work while Bangi
+          is open. Optional background notifications need a connected backend;
+          calendar export remains available.
         </Txt>
         <Button
           label="Browser permissions & installation help"
