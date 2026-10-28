@@ -65,7 +65,6 @@ const bindings = [
     name: "APP_ORIGIN",
     text: "https://joebillie.github.io",
   },
-  ...existing.map((s) => ({ type: "secret_text", name: s.name })),
 ];
 if (!hasKeys) {
   const keys = webPush.generateVAPIDKeys();
@@ -90,6 +89,7 @@ form.set(
         compatibility_date: "2026-10-01",
         compatibility_flags: ["nodejs_compat"],
         bindings,
+        keep_bindings: ["secret_text"],
       }),
     ],
     { type: "application/json" },

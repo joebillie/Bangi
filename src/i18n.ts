@@ -1,3 +1,5 @@
+import { ms } from "./malay";
+export type Language = "en" | "ar" | "ms";
 // Keep copy in dictionaries so additional languages can be added without changing components.
 const ar: Record<string, string> = {
   "Fixed location": "موقع ثابت",
@@ -122,6 +124,38 @@ const ar: Record<string, string> = {
   "Obligatory prayer": "صلاة مفروضة",
   "Sunrise · not an obligatory prayer": "الشروق · ليس صلاة مفروضة",
 };
-export function translate(text: string, language: "en" | "ar") {
-  return language === "ar" ? ar[text] || text : text;
+export function translate(text: string, language: Language): string {
+  const dictionary =
+    language === "ar" ? ar : language === "ms" ? ms : undefined;
+  if (!dictionary) return text;
+  if (dictionary[text]) return dictionary[text];
+  if (language === "ms") {
+    const turn = text.match(/^Turn (\d+)° (clockwise|counterclockwise)$/);
+    if (turn)
+      return `Pusing ${turn[1]}° ${turn[2] === "clockwise" ? "mengikut arah jam" : "melawan arah jam"}`;
+    const heading = text.match(/^Device heading: (\d+)° true north$/);
+    if (heading) return `Arah peranti: ${heading[1]}° dari utara sebenar`;
+    const prayer = text.match(
+      /^(fajr|dhuhr|asr|maghrib|isha|sunrise) reminders enabled$/i,
+    );
+    if (prayer) return `Aktifkan peringatan ${ms[prayer[1].toLowerCase()]}`;
+    const before = text.match(/^(\d+) (?:minutes|min) before$/);
+    if (before) return `${before[1]} minit sebelum`;
+  }
+  return text;
 }
+export const prayerLabel = (name: string, language: Language) =>
+  language === "ar"
+    ? {
+        fajr: "الفجر",
+        dhuhr: "الظهر",
+        asr: "العصر",
+        maghrib: "المغرب",
+        isha: "العشاء",
+        sunrise: "الشروق",
+      }[name] || name
+    : language === "en"
+      ? name[0].toUpperCase() + name.slice(1)
+      : translate(name, language);
+export const dateLocale = (language: Language) =>
+  language === "ar" ? "ar-SA" : language === "ms" ? "ms-MY" : "en-GB";

@@ -122,6 +122,7 @@ const preferences = (s: Settings) => ({
   location: s.location,
   calculation: s.calculation,
   reminders: s.reminders,
+  language: s.language,
 });
 function decode(value: string) {
   const normalized = value.replaceAll("-", "+").replaceAll("_", "/");

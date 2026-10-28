@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { router } from "expo-router";
+import { translate } from "../../src/i18n";
 import { useApp } from "../../src/store";
 import {
   Button,
@@ -23,7 +24,11 @@ export default function Settings() {
     <Screen title="A space that feels like you">
       <Field label="Search settings" value={query} onChange={setQuery} />
       {items
-        .filter(([title]) => title.toLowerCase().includes(query.toLowerCase()))
+        .filter(([title]) =>
+          [title, translate(`${title}  ↗`, s.language)].some((text) =>
+            text.toLowerCase().includes(query.toLowerCase()),
+          ),
+        )
         .map(([label, path]) => (
           <Button
             key={path}
@@ -41,7 +46,7 @@ export default function Settings() {
         />
         <Txt>Interface language</Txt>
         <Choices
-          values={["en", "ar"]}
+          values={["en", "ar", "ms"]}
           value={s.language}
           onChange={(language) => update((v) => ({ ...v, language }))}
         />

@@ -216,3 +216,36 @@ test("background push stays disconnected without a deployed service and sends no
   ).toBeDisabled();
   expect(cloudRequests).toEqual([]);
 });
+
+test("Malay language persists across screens and restores English", async ({
+  page,
+}) => {
+  await page.goto("/location");
+  await page
+    .getByRole("button", { name: "London, United Kingdom", exact: true })
+    .click();
+  await page.goto("/settings");
+  await page.getByRole("button", { name: "ms", exact: true }).click();
+  await expect(
+    page.getByText("Bahasa & kalendar", { exact: true }),
+  ).toBeVisible();
+  await page.goto("/times");
+  await expect(page.getByText("Waktu solat", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Syuruk/).first()).toBeVisible();
+  await page.goto("/qibla");
+  await expect(
+    page.getByText("Menghadap ke arah Makkah", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Bearing dari utara sebenar", { exact: true }),
+  ).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Mulakan kompas langsung", exact: true }),
+  ).toBeVisible();
+  await page.goto("/settings");
+  await page.getByRole("button", { name: "en", exact: true }).click();
+  await expect(
+    page.getByText("Language & calendar", { exact: true }),
+  ).toBeVisible();
+});

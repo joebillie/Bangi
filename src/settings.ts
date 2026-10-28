@@ -20,7 +20,7 @@ export type Settings = {
   savedThemes: Record<string, { light: Palette; dark: Palette }>;
   textSize: "Small" | "Medium" | "Large";
   arabic: boolean;
-  language: "en" | "ar";
+  language: "en" | "ar" | "ms";
   calendar: "both" | "gregorian" | "hijri";
   layout: "compact" | "cards";
 };
@@ -159,7 +159,7 @@ export function restore(raw: string | null): Settings {
   if (!["Small", "Medium", "Large"].includes(out.textSize))
     out.textSize = "Medium";
   if (!["light", "dark", "system"].includes(out.mode)) out.mode = "system";
-  if (!["en", "ar"].includes(out.language)) out.language = "en";
+  if (!["en", "ar", "ms"].includes(out.language)) out.language = "en";
   if (!["both", "gregorian", "hijri"].includes(out.calendar))
     out.calendar = "both";
   if (!["compact", "cards"].includes(out.layout)) out.layout = "cards";

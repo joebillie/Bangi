@@ -132,3 +132,5 @@ The Supabase Web Push implementation and automated setup are documented in [back
 ### Cloudflare deployment
 
 The active Web Push backend uses Cloudflare Workers, D1 and Cron Triggers. See [Cloudflare setup, privacy and limitations](cloudflare/README.md). Supabase below is an alternative implementation, not required for Cloudflare.
+
+Interface languages: English, Arabic (RTL) and Bahasa Melayu. Select `ms` under Settings → Interface language. Language choice is stored locally and is included with opted-in background reminder preferences. Official calculation method names and geographic place names retain their original names.

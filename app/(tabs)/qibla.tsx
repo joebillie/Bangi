@@ -35,7 +35,9 @@ export default function Qibla() {
             accessibilityLabel={
               ar
                 ? `اتجاه القبلة ${b.toFixed(1)} درجة من الشمال الحقيقي. ${heading === null ? "اتجاه الجهاز غير متاح" : `اتجاه الجهاز ${heading.toFixed(0)} درجة. ${aligned ? "أنت باتجاه القبلة" : ""}`}`
-                : `Qibla ${b.toFixed(1)} degrees from true north. ${heading === null ? "Device heading unavailable" : `Device heading ${heading.toFixed(0)} degrees. ${aligned ? "Aligned with Qibla" : ""}`}`
+                : s.language === "ms"
+                  ? `Kiblat ${b.toFixed(1)} darjah dari utara sebenar. ${heading === null ? "Arah peranti tidak tersedia" : `Arah peranti ${heading.toFixed(0)} darjah. ${aligned ? "Menghadap kiblat" : ""}`}`
+                  : `Qibla ${b.toFixed(1)} degrees from true north. ${heading === null ? "Device heading unavailable" : `Device heading ${heading.toFixed(0)} degrees. ${aligned ? "Aligned with Qibla" : ""}`}`
             }
             style={{ alignItems: "center" }}
           >
@@ -61,26 +63,29 @@ export default function Qibla() {
                   transform={`rotate(${i * 5 - (heading || 0)} 160 165)`}
                 />
               ))}
-              {(ar ? ["شمال", "شرق", "جنوب", "غرب"] : ["N", "E", "S", "W"]).map(
-                (v, i) => (
-                  <SvgText
-                    key={v}
-                    x={
-                      160 +
-                      99 * Math.sin(((i * 90 - (heading || 0)) * Math.PI) / 180)
-                    }
-                    y={
-                      171 -
-                      99 * Math.cos(((i * 90 - (heading || 0)) * Math.PI) / 180)
-                    }
-                    fill={p.secondaryText}
-                    textAnchor="middle"
-                    fontSize="17"
-                  >
-                    {v}
-                  </SvgText>
-                ),
-              )}
+              {(ar
+                ? ["شمال", "شرق", "جنوب", "غرب"]
+                : s.language === "ms"
+                  ? ["U", "T", "S", "B"]
+                  : ["N", "E", "S", "W"]
+              ).map((v, i) => (
+                <SvgText
+                  key={v}
+                  x={
+                    160 +
+                    99 * Math.sin(((i * 90 - (heading || 0)) * Math.PI) / 180)
+                  }
+                  y={
+                    171 -
+                    99 * Math.cos(((i * 90 - (heading || 0)) * Math.PI) / 180)
+                  }
+                  fill={p.secondaryText}
+                  textAnchor="middle"
+                  fontSize="17"
+                >
+                  {v}
+                </SvgText>
+              ))}
               <Path
                 d="M160 67 L177 177 L160 163 L143 177 Z"
                 fill={p.qibla}

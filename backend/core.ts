@@ -1,10 +1,11 @@
+import { prayerLabel, type Language } from "../src/i18n";
 import { defaults, validPlace, type Settings } from "../src/settings";
 import { methods, prayers } from "../src/prayer";
 import { planReminders } from "../src/reminders";
 export type Preferences = Pick<
   Settings,
   "location" | "calculation" | "reminders"
->;
+> & { language?: Language };
 export type Subscription = {
   endpoint: string;
   keys: { auth: string; p256dh: string };
@@ -161,6 +162,9 @@ export function validatePreferences(value: unknown): Preferences {
       location: p.location,
       calculation: p.calculation,
       reminders: p.reminders,
+      language: ["en", "ar", "ms"].includes(p.language || "")
+        ? p.language
+        : "en",
     }),
   );
 }
@@ -173,8 +177,13 @@ export function makeJobs(prefs: Preferences, now: Date) {
     jobs: planned.map((item) => ({
       id: item.id,
       due_at: item.date.toISOString(),
-      title: `${item.prayer[0].toUpperCase() + item.prayer.slice(1)} · ${item.time}`,
-      body: "A moment to pause, reflect, and pray.",
+      title: `${prayerLabel(item.prayer, prefs.language || "en")} · ${item.time}`,
+      body:
+        prefs.language === "ms"
+          ? "Luangkan sejenak untuk berhenti, merenung dan bersolat."
+          : prefs.language === "ar"
+            ? "لحظة للتوقف والتأمل والصلاة."
+            : "A moment to pause, reflect, and pray.",
       sound: item.sound,
       vibrate: item.vibrate,
     })),

@@ -1,3 +1,4 @@
+import { translate, prayerLabel, dateLocale } from "./i18n";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import Svg, { Path } from "react-native-svg";
@@ -87,7 +88,7 @@ export function Dashboard() {
     .filter((t) => t.name !== "sunrise" && t.time <= now)
     .at(-1)?.name;
   const hijri = new Intl.DateTimeFormat(
-    s.language === "ar" ? "ar-SA-u-ca-islamic" : "en-GB-u-ca-islamic",
+    `${dateLocale(s.language)}-u-ca-islamic`,
     {
       day: "numeric",
       month: "long",
@@ -128,6 +129,7 @@ export function Dashboard() {
           {s.calendar !== "hijri" &&
             DateTime.fromJSDate(now)
               .setZone(place.timezone)
+              .setLocale(dateLocale(s.language))
               .toFormat("cccc, d LLLL yyyy")}
           {s.calendar === "both" ? " · " : ""}
           {s.calendar !== "gregorian" && hijri}
@@ -136,7 +138,7 @@ export function Dashboard() {
           {formatTime(now, place.timezone)} · {place.timezone}
         </Txt>
         <Txt color={p.accent} size={13}>
-          NEXT PRAYER · {next?.name.toUpperCase() || "UNAVAILABLE"}
+          {`${translate("NEXT PRAYER", s.language)} · ${next ? prayerLabel(next.name, s.language).toUpperCase() : translate("UNAVAILABLE", s.language)}`}
         </Txt>
         <Txt
           size={44}
@@ -147,7 +149,7 @@ export function Dashboard() {
         </Txt>
         <Txt color={p.headerText}>
           {next
-            ? `${next.name[0].toUpperCase() + next.name.slice(1)} at ${formatTime(next.time, place.timezone)}`
+            ? `${prayerLabel(next.name, s.language)} ${s.language === "ms" ? "pada" : s.language === "ar" ? "الساعة" : "at"} ${formatTime(next.time, place.timezone)}`
             : s.calculation.method === "NamaadhuVaguthu"
               ? "Choose a supported timetable island in calculation settings."
               : "Try another high-latitude rule; the sun may not cross the required angle."}
@@ -238,21 +240,23 @@ export function PrayerSchedule({
                 size={19}
                 style={{ textTransform: "capitalize" }}
               >
-                {t.name}
-                {s.arabic || s.language === "ar" ? `  ${arabic[t.name]}` : ""}
+                {`${s.language === "ms" ? prayerLabel(t.name, s.language) : t.name}${s.arabic || s.language === "ar" ? `  ${arabic[t.name]}` : ""}`}
               </Txt>
               <Txt size={12} color={p.secondaryText}>
-                {t.name === "sunrise"
-                  ? "Sunrise · not an obligatory prayer"
-                  : t.name === nextName
-                    ? "Up next"
-                    : t.name === current
-                      ? "Current prayer"
-                      : "Obligatory prayer"}
+                {translate(
+                  t.name === "sunrise"
+                    ? "Sunrise · not an obligatory prayer"
+                    : t.name === nextName
+                      ? "Up next"
+                      : t.name === current
+                        ? "Current prayer"
+                        : "Obligatory prayer",
+                  s.language,
+                )}
                 {t.name !== "sunrise" &&
                 s.notifications &&
                 s.reminders[t.name].enabled
-                  ? " · Reminder on"
+                  ? ` · ${translate("Reminder on", s.language)}`
                   : ""}
               </Txt>
             </View>

@@ -1,3 +1,4 @@
+import { prayerLabel, type Language } from "./i18n";
 import { backgroundPushEnabled } from "./background-push";
 import { assetUrl } from "./urls";
 import { Settings } from "./settings";
@@ -37,11 +38,17 @@ export async function requestBrowserPermission() {
       "Browser alerts are not allowed. In-app reminders and calendar export remain available.",
     );
 }
-async function deliver(item: PlannedReminder) {
-  const title = `${item.prayer[0].toUpperCase() + item.prayer.slice(1)} · ${item.time}`;
+async function deliver(item: PlannedReminder, language: Language) {
+  const title = `${prayerLabel(item.prayer, language)} · ${item.time}`;
+  const body =
+    language === "ms"
+      ? "Luangkan sejenak untuk berhenti, merenung dan bersolat."
+      : language === "ar"
+        ? "لحظة للتوقف والتأمل والصلاة."
+        : "A moment to pause, reflect, and pray.";
   window.dispatchEvent(
     new CustomEvent("bangi:reminder", {
-      detail: `${title} — A moment to pause, reflect, and pray.`,
+      detail: `${title} — ${body}`,
     }),
   );
   if (backgroundPushEnabled()) return; // The server push owns system alerts and sound while connected.
@@ -71,7 +78,7 @@ async function deliver(item: PlannedReminder) {
     navigator.vibrate([200, 100, 200]);
   if ("Notification" in window && Notification.permission === "granted") {
     const options = {
-      body: "A moment to pause, reflect, and pray.",
+      body,
       tag: item.id,
       icon: assetUrl("icon-192.png"),
       silent: !item.sound,
@@ -127,7 +134,7 @@ export async function syncNotifications(settings: Settings) {
         try {
           localStorage.setItem(FIRED, JSON.stringify([...fired].slice(-300)));
         } catch {}
-        await deliver(item);
+        await deliver(item, settings.language);
       }
       const now = new Date();
       if (!queue.some((item) => item.date > now))
