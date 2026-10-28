@@ -4,10 +4,15 @@ import { DateTime } from "luxon";
 import { useApp } from "./store";
 import { namaadhuUnavailable, namaadhuSourceUrl } from "./maldives";
 import { Button, Card, Txt } from "./ui";
-export function SourceNotice() {
+export function SourceNotice({
+  onlyUnavailable = false,
+}: {
+  onlyUnavailable?: boolean;
+}) {
   const { settings: s } = useApp();
   if (s.calculation.method !== "NamaadhuVaguthu") return null;
   const unavailable = namaadhuUnavailable(s.location, s.calculation);
+  if (onlyUnavailable && !unavailable) return null;
   return (
     <Card>
       <Txt size={20}>Namaadhu Vaguthu</Txt>

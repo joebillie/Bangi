@@ -13,6 +13,8 @@ jobs:
       - run: npm run typecheck
       - run: npm run check:backend
       - run: npm run build:backend
+      - run: npm run build:cloudflare
+      - run: node scripts/verify-cloudflare.mjs
       - run: npm run lint
       - run: npm test
       - run: npm run build:web

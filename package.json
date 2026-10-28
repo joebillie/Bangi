@@ -18,7 +18,9 @@
     "check:backend": "tsc --noEmit --project backend/tsconfig.json",
     "build:backend": "node scripts/build-backend.mjs",
     "deploy:backend": "node --use-env-proxy scripts/deploy-backend.mjs",
-    "test:worker": "node --test --experimental-test-isolation=none tests/push-worker.test.mjs"
+    "test:worker": "node --test --experimental-test-isolation=none tests/push-worker.test.mjs",
+    "build:cloudflare": "node scripts/build-cloudflare.mjs",
+    "deploy:cloudflare": "node --use-env-proxy scripts/deploy-cloudflare.mjs"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "2.2.0",

@@ -34,8 +34,11 @@ async function configuration() {
   const url = new URL(value.endpoint);
   if (
     url.protocol !== "https:" ||
-    !url.hostname.endsWith(".supabase.co") ||
-    url.pathname !== "/functions/v1/prayer-push"
+    !(
+      (url.hostname.endsWith(".supabase.co") &&
+        url.pathname === "/functions/v1/prayer-push") ||
+      (url.hostname.endsWith(".workers.dev") && url.pathname === "/prayer-push")
+    )
   )
     throw Error("Invalid background notification service configuration.");
   const details = await fetch(url + "/config", { cache: "no-store" });
@@ -61,7 +64,19 @@ async function connection() {
   return { c, client };
 }
 async function session() {
-  const { c, client } = await connection();
+  const c = await configuration();
+  if (new URL(c.endpoint).hostname.endsWith(".workers.dev")) {
+    const key = "bangi:cloudflare-installation:v1";
+    let token = localStorage.getItem(key);
+    if (!token) {
+      token = Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) =>
+        b.toString(16).padStart(2, "0"),
+      ).join("");
+      localStorage.setItem(key, token);
+    }
+    return { c, token };
+  }
+  const { client } = await connection();
   let {
     data: { session },
     error,

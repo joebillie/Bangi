@@ -1,6 +1,6 @@
 # Bangi — an installable prayer web app
 
-Bangi is a responsive, offline-first **PWA** for iPhone, iPad, Android browsers, and desktop. On iPhone, add it to the Home Screen from Safari: it gets its own icon and opens as an app without browser controls. Core features need no App Store account, backend, or API key. Optional background notifications use the Supabase backend described below.
+Bangi is a responsive, offline-first **PWA** for iPhone, iPad, Android browsers, and desktop. On iPhone, add it to the Home Screen from Safari: it gets its own icon and opens as an app without browser controls. Core features need no App Store account, backend, or API key. Optional background notifications use the Cloudflare backend described in [cloudflare/README.md](cloudflare/README.md).
 
 ## Use it on iPhone
 
@@ -52,7 +52,7 @@ Compare calculated times with your local mosque. Umm al-Qura's fixed Isha interv
 
 **A Home Screen PWA cannot reliably schedule local notifications while closed.** Bangi does not claim otherwise. In-app reminders require the page to remain visible. Safari can suspend timers when the screen locks or the app is backgrounded; reminders more than two minutes late are skipped rather than delivered in a burst. The queue refreshes on settings changes, resume and while running. A local delivered-ID history, and Web Locks where available, reduce duplicates across tabs.
 
-Optional system alerts require HTTPS, browser permission and platform support. iPhone Web Push generally requires a Home Screen installation and iOS 16.4+, and scheduled push while the app is closed uses the optional Supabase backend. It must be deployed and connected first. `showNotification` is attempted only when permitted; the in-app banner remains the fallback. Sound is unlocked by the enable gesture and can still be suppressed by Safari or device settings. iPhone does not support browser vibration. Focus modes and system settings always control presentation.
+Optional system alerts require HTTPS, browser permission and platform support. iPhone Web Push generally requires a Home Screen installation and iOS 16.4+, and scheduled push while the app is closed uses the optional Cloudflare backend. It must be deployed and connected first. `showNotification` is attempted only when permitted; the in-app banner remains the fallback. Sound is unlocked by the enable gesture and can still be suppressed by Safari or device settings. iPhone does not support browser vibration. Focus modes and system settings always control presentation.
 
 For reminders managed outside Bangi, export the `.ics` file and import it into a calendar that supports event alarms. Calendar software may ignore imported alarms or control them differently. On iPhone, use the downloaded file's share/open options with a compatible calendar app; if Apple Calendar does not offer direct import, import on a Mac/desktop calendar and sync it to the phone. Calendar entries do not update when Bangi settings change. Delete the previous imported calendar/events before importing a replacement; importing repeatedly can duplicate events. Sound/vibration are controlled by the calendar app, not by `.ics`.
 
@@ -60,7 +60,7 @@ Compass heading requires a supported **absolute** orientation source. Relative a
 
 ## Privacy and networking
 
-Calculations, coordinate-to-time-zone lookup (`tz-lookup`), magnetic declination (`geomagnetism`) and settings stay on device. Browser geolocation is provided by the OS/browser; no coordinates are sent by Bangi to a geocoder. Online city search sends only search text to `geocoding-api.open-meteo.com` (Open-Meteo / GeoNames). Core features use no analytics or backend account. Opting into background push creates an anonymous installation identity and stores the selected prayer location, calculation/source, reminder preferences and push subscription on Supabase; see the consent text and backend documentation.
+Calculations, coordinate-to-time-zone lookup (`tz-lookup`), magnetic declination (`geomagnetism`) and settings stay on device. Browser geolocation is provided by the OS/browser; no coordinates are sent by Bangi to a geocoder. Online city search sends only search text to `geocoding-api.open-meteo.com` (Open-Meteo / GeoNames). Core features use no analytics or backend account. Opting into background push creates an anonymous installation identity and stores the selected prayer location, calculation/source, reminder preferences and push subscription on Cloudflare; see the consent text and backend documentation.
 
 Restricted cloud tasks need `geocoding-api.open-meteo.com` for online city search. Maintaining the Namaadhu Vaguthu snapshot additionally needs `namaadhuvaguthu.com` and the public dataset host; the installed app does not fetch that snapshot at runtime. Offline city, coordinate and timetable selection work independently. A public website user's connectivity is determined by that user's browser/network, separately from the cloud build environment.
 
@@ -128,3 +128,7 @@ Choosing this source requires choosing an explicit Maldives timetable island. Ch
 ## Optional closed-app notifications
 
 The Supabase Web Push implementation and automated setup are documented in [backend/README.md](backend/README.md). It is opt-in and remains disconnected until a real project is deployed and health-checked. The supplied setup uses Supabase Free for a small personal deployment and does not change billing plans.
+
+### Cloudflare deployment
+
+The active Web Push backend uses Cloudflare Workers, D1 and Cron Triggers. See [Cloudflare setup, privacy and limitations](cloudflare/README.md). Supabase below is an alternative implementation, not required for Cloudflare.

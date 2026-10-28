@@ -175,9 +175,15 @@ test("Namaadhu Vaguthu island source survives restart and refuses unsupported co
 test("background push stays disconnected without a deployed service and sends no prayer data", async ({
   page,
 }) => {
+  await page.route("**/push-config.json", (route) =>
+    route.fulfill({ json: { enabled: false } }),
+  );
   const cloudRequests: string[] = [];
   page.on("request", (request) => {
-    if (request.url().includes(".supabase.co"))
+    if (
+      request.url().includes(".supabase.co") ||
+      request.url().includes(".workers.dev")
+    )
       cloudRequests.push(request.url());
   });
   await page.goto("/reminders");

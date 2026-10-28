@@ -55,7 +55,7 @@ export function Dashboard() {
       <Screen title="Welcome to Bangi">
         <Ornament />
         <PwaStatus />
-        <SourceNotice />
+        <SourceNotice onlyUnavailable />
         <Card>
           <Txt size={23} color={p.heading}>
             Your day, guided by prayer.
@@ -99,7 +99,7 @@ export function Dashboard() {
   return (
     <Screen title="Assalamu alaikum">
       <PwaStatus />
-      <SourceNotice />
+      <SourceNotice onlyUnavailable />
       <Row>
         <View style={{ flex: 1 }}>
           <Txt size={20} color={p.heading}>
@@ -195,6 +195,9 @@ export function Dashboard() {
         secondary
         onPress={() => router.push("/settings")}
       />
+      <Txt size={12} color={p.secondaryText} style={{ textAlign: "center" }}>
+        Created by Joebillie
+      </Txt>
     </Screen>
   );
 }
