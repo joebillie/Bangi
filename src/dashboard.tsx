@@ -12,7 +12,6 @@ import {
   formatTime,
   localDay,
   nextPrayer,
-  Prayer,
   schedule,
   methodDetail,
 } from "./prayer";
@@ -240,9 +239,7 @@ export function PrayerSchedule({
                 style={{ textTransform: "capitalize" }}
               >
                 {t.name}
-                {s.arabic && t.name !== "sunrise"
-                  ? `  ${arabic[t.name as Prayer]}`
-                  : ""}
+                {s.arabic || s.language === "ar" ? `  ${arabic[t.name]}` : ""}
               </Txt>
               <Txt size={12} color={p.secondaryText}>
                 {t.name === "sunrise"

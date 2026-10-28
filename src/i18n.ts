@@ -1,5 +1,52 @@
 // Keep copy in dictionaries so additional languages can be added without changing components.
 const ar: Record<string, string> = {
+  "Fixed location": "موقع ثابت",
+  "Current location": "الموقع الحالي",
+  "✓ You are facing the Qibla": "✓ أنت باتجاه القبلة",
+  "≈ Near Qibla · accuracy unverified":
+    "≈ قريب من اتجاه القبلة · الدقة غير مؤكدة",
+  "Bearing from true north": "الاتجاه من الشمال الحقيقي",
+  "North is shown at the top in this fallback view. Align north using a reliable external compass.":
+    "يظهر الشمال في أعلى هذا العرض البديل. حدد الشمال باستخدام بوصلة خارجية موثوقة.",
+  "Alignment is approximate even with calibrated sensors. Nearby magnets, cases, cars, and electronics can distort sensors. This view is designed for a flat phone in portrait orientation. For a fixed home city while travelling, this bearing belongs to that city, not your physical position.":
+    "المحاذاة تقريبية حتى بعد معايرة المستشعرات. قد تؤثر المغناطيسات والأغطية والسيارات والأجهزة الإلكترونية القريبة في دقتها. أمسك الهاتف بشكل مسطح وفي الوضع العمودي. عند اختيار مدينة ثابتة أثناء السفر، يكون اتجاه القبلة خاصاً بتلك المدينة وليس بموقعك الفعلي.",
+  "Tap Start live compass, allow motion and location, then hold your phone flat in portrait.":
+    "اضغط على تشغيل البوصلة، واسمح بالوصول إلى الحركة والموقع، ثم أمسك الهاتف بشكل مسطح وفي الوضع العمودي.",
+  "Checking compass access…": "جارٍ التحقق من إمكانية الوصول إلى البوصلة…",
+  "The live compass needs HTTPS. The calculated geographic bearing is available below.":
+    "تحتاج البوصلة المباشرة إلى اتصال HTTPS آمن. الاتجاه الجغرافي المحسوب متاح أدناه.",
+  "This browser has no compass access. Use the geographic bearing below.":
+    "لا يدعم هذا المتصفح الوصول إلى البوصلة. استخدم الاتجاه الجغرافي أدناه.",
+  "Motion permission was denied. Enable Motion & Orientation Access in Safari or use the geographic bearing.":
+    "تم رفض إذن الحركة. فعّل الوصول إلى الحركة والاتجاه في سفاري أو استخدم الاتجاه الجغرافي.",
+  "Location is unavailable. True-north correction needs your physical coordinates.":
+    "الموقع غير متاح. يتطلب تصحيح الشمال الحقيقي إحداثيات موقعك الفعلي.",
+  "Hold your phone flat in portrait and slowly turn. Your GPS is used locally to correct magnetic north; your selected prayer city stays unchanged.":
+    "أمسك الهاتف بشكل مسطح وفي الوضع العمودي ثم استدر ببطء. يُستخدم موقعك محلياً لتصحيح الشمال المغناطيسي؛ وتبقى مدينة الصلاة المختارة دون تغيير.",
+  "Compass permission or location was unavailable. Use the geographic bearing below.":
+    "إذن البوصلة أو الموقع غير متاح. استخدم الاتجاه الجغرافي أدناه.",
+  "Rotate your phone to portrait and hold it flat.":
+    "ضع الهاتف في الوضع العمودي وأمسكه بشكل مسطح.",
+  "Hold your phone flat. An absolute compass reading is required; relative orientation alone cannot find north.":
+    "أمسك الهاتف بشكل مسطح. يلزم توفر قراءة مطلقة للبوصلة؛ الاتجاه النسبي وحده لا يحدد الشمال.",
+  "True-north estimate · Keep away from magnets and metal.":
+    "تقدير الشمال الحقيقي · ابتعد عن المغناطيسات والمعادن.",
+  "Heading accuracy is uncertain. Calibrate with a figure eight, keep the phone flat, and compare with an independent compass.":
+    "دقة الاتجاه غير مؤكدة. حرّك الهاتف على شكل الرقم 8 للمعايرة، ثم أمسكه بشكل مسطح وقارن الاتجاه ببوصلة مستقلة.",
+  "No compass reading is available. Check location services or use the geographic bearing.":
+    "لا تتوفر قراءة للبوصلة. تحقق من خدمات الموقع أو استخدم الاتجاه الجغرافي.",
+  "This device has no usable magnetometer. Use the geographic bearing below.":
+    "لا يحتوي هذا الجهاز على مستشعر مغناطيسي قابل للاستخدام. استخدم الاتجاه الجغرافي أدناه.",
+  "Heading permission was denied. Use the geographic bearing below.":
+    "تم رفض إذن تحديد الاتجاه. استخدم الاتجاه الجغرافي أدناه.",
+  "Compass unavailable. Use the geographic bearing.":
+    "البوصلة غير متاحة. استخدم الاتجاه الجغرافي.",
+  "Location permission denied. Use the geographic bearing below.":
+    "تم رفض إذن الموقع. استخدم الاتجاه الجغرافي أدناه.",
+  "Location could not be determined. Use the geographic bearing below.":
+    "تعذر تحديد الموقع. استخدم الاتجاه الجغرافي أدناه.",
+  "Location request timed out. Use the geographic bearing below.":
+    "انتهت مهلة تحديد الموقع. استخدم الاتجاه الجغرافي أدناه.",
   Times: "المواقيت",
   "Previous day": "اليوم السابق",
   "Next day": "اليوم التالي",

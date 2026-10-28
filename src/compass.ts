@@ -60,9 +60,15 @@ export function useHeading() {
     } catch (error) {
       setSession(null);
       setMessage(
-        error instanceof Error
-          ? error.message
-          : "Compass permission or location was unavailable. Use the geographic bearing below.",
+        typeof error === "object" && error !== null && "code" in error
+          ? Number(error.code) === 1
+            ? "Location permission denied. Use the geographic bearing below."
+            : Number(error.code) === 3
+              ? "Location request timed out. Use the geographic bearing below."
+              : "Location could not be determined. Use the geographic bearing below."
+          : error instanceof Error
+            ? error.message
+            : "Compass permission or location was unavailable. Use the geographic bearing below.",
       );
     }
   };

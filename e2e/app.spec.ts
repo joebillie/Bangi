@@ -122,6 +122,21 @@ test("country switching, calculation editing, theme validation and large RTL lay
   ).toBe(true);
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.screenshot({ path: "/tmp/bangi-tablet-rtl.png" });
+  await page.goto("/times");
+  await expect(page.getByText(/sunrise.*الشروق/i)).toBeVisible();
+  await page.goto("/qibla");
+  await expect(page.getByText("توجه نحو مكة", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("الاتجاه من الشمال الحقيقي", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "تشغيل البوصلة", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText(/اضغط على تشغيل البوصلة، واسمح/)).toBeVisible();
+  await expect(page.getByText("شمال", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Bearing from true north", { exact: true }),
+  ).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
