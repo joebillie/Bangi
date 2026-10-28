@@ -7,3 +7,7 @@ ios/
 *.log
 test-results/
 playwright-report/
+backend-dist/
+.env
+.env.*
+.supabase/

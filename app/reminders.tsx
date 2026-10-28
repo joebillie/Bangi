@@ -1,5 +1,6 @@
 import { Platform } from "react-native";
 import { downloadCalendar } from "../src/calendar-download";
+import { BackgroundPushCard } from "../src/background-push-card";
 import { useState } from "react";
 import { useApp } from "../src/store";
 import { prayers, Prayer } from "../src/prayer";
@@ -104,8 +105,8 @@ export default function Reminders() {
     <Screen title="A gentle invitation">
       <Card>
         <Txt>
-          Allow notifications to receive prayer reminders without opening Bangi.
-          Your location stays on this device.
+          Enable gentle prayer reminders while Bangi is open. Connect background
+          notifications below to receive Web Push when the app is closed.
         </Txt>
         <Toggle
           label="Enable prayer notifications"
@@ -128,6 +129,7 @@ export default function Reminders() {
           />
         )}
       </Card>
+      <BackgroundPushCard />
       {prayers.map((p) => (
         <PrayerReminder key={p} prayer={p} />
       ))}
@@ -153,11 +155,9 @@ export default function Reminders() {
         />
       </Card>
       <Txt size={13}>
-        Browsers cannot reliably schedule local notifications while closed,
-        including Home Screen apps. Browser alerts vary by Safari version and
-        installation status. Scheduled Web Push while closed would require a
-        push backend, which Bangi does not use. Keep the app visible for in-app
-        reminders, or use calendar export.
+        Foreground reminders need Bangi to remain visible. Background
+        notifications require a connected, running backend and internet access.
+        Calendar export remains available independently of the backend.
       </Txt>
     </Screen>
   );

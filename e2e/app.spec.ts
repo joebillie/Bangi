@@ -122,6 +122,21 @@ test("country switching, calculation editing, theme validation and large RTL lay
   ).toBe(true);
   await page.setViewportSize({ width: 768, height: 1024 });
   await page.screenshot({ path: "/tmp/bangi-tablet-rtl.png" });
+  await page.goto("/times");
+  await expect(page.getByText(/sunrise.*الشروق/i)).toBeVisible();
+  await page.goto("/qibla");
+  await expect(page.getByText("توجه نحو مكة", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("الاتجاه من الشمال الحقيقي", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "تشغيل البوصلة", exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText(/اضغط على تشغيل البوصلة، واسمح/)).toBeVisible();
+  await expect(page.getByText("شمال", { exact: true })).toBeVisible();
+  await expect(
+    page.getByText("Bearing from true north", { exact: true }),
+  ).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
@@ -170,4 +185,67 @@ test("Namaadhu Vaguthu island source survives restart and refuses unsupported co
     page.getByRole("button", { name: "Choose timetable island", exact: true }),
   ).toBeVisible();
   await expect(page.getByText("04:36", { exact: true })).toHaveCount(0);
+});
+
+test("background push stays disconnected without a deployed service and sends no prayer data", async ({
+  page,
+}) => {
+  await page.route("**/push-config.json", (route) =>
+    route.fulfill({ json: { enabled: false } }),
+  );
+  const cloudRequests: string[] = [];
+  page.on("request", (request) => {
+    if (
+      request.url().includes(".supabase.co") ||
+      request.url().includes(".workers.dev")
+    )
+      cloudRequests.push(request.url());
+  });
+  await page.goto("/reminders");
+  await expect(
+    page.getByText(
+      "Background notifications are not connected to a backend yet.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", {
+      name: "Enable background notifications",
+      exact: true,
+    }),
+  ).toBeDisabled();
+  expect(cloudRequests).toEqual([]);
+});
+
+test("Malay language persists across screens and restores English", async ({
+  page,
+}) => {
+  await page.goto("/location");
+  await page
+    .getByRole("button", { name: "London, United Kingdom", exact: true })
+    .click();
+  await page.goto("/settings");
+  await page.getByRole("button", { name: "ms", exact: true }).click();
+  await expect(
+    page.getByText("Bahasa & kalendar", { exact: true }),
+  ).toBeVisible();
+  await page.goto("/times");
+  await expect(page.getByText("Waktu solat", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Syuruk/).first()).toBeVisible();
+  await page.goto("/qibla");
+  await expect(
+    page.getByText("Menghadap ke arah Makkah", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Bearing dari utara sebenar", { exact: true }),
+  ).toBeVisible();
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Mulakan kompas langsung", exact: true }),
+  ).toBeVisible();
+  await page.goto("/settings");
+  await page.getByRole("button", { name: "en", exact: true }).click();
+  await expect(
+    page.getByText("Language & calendar", { exact: true }),
+  ).toBeVisible();
 });

@@ -10,7 +10,8 @@ import { namaadhuSchedule } from "./maldives";
 import { DateTime } from "luxon";
 export const prayers = ["fajr", "dhuhr", "asr", "maghrib", "isha"] as const;
 export type Prayer = (typeof prayers)[number];
-export const arabic: Record<Prayer, string> = {
+export const arabic: Record<Prayer | "sunrise", string> = {
+  sunrise: "الشروق",
   fajr: "الفجر",
   dhuhr: "الظهر",
   asr: "العصر",

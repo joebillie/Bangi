@@ -3,11 +3,14 @@ import Svg, { Circle, Line, Text as SvgText, Path } from "react-native-svg";
 import { router } from "expo-router";
 import { useApp } from "../../src/store";
 import { bearing, relativeBearing } from "../../src/prayer";
+import { translate } from "../../src/i18n";
 import { useHeading } from "../../src/compass";
 import { Button, Card, Screen, Txt } from "../../src/ui";
 export default function Qibla() {
   const { settings: s, palette: p } = useApp();
   const { heading, message, reliable, start } = useHeading();
+  const ar = s.language === "ar";
+  const t = (text: string) => translate(text, s.language);
   const b = s.location ? bearing(s.location) : 0;
   const angle = heading === null ? b : relativeBearing(b, heading);
   const near = heading !== null && Math.abs(angle) < 5;
@@ -24,12 +27,18 @@ export default function Qibla() {
           <Txt color={p.secondaryText}>
             {s.location.name} ·{" "}
             {s.locationMode === "manual"
-              ? "Fixed location"
-              : "Current location"}
+              ? t("Fixed location")
+              : t("Current location")}
           </Txt>
           <View
             accessible
-            accessibilityLabel={`Qibla ${b.toFixed(1)} degrees from true north. ${heading === null ? "Device heading unavailable" : `Device heading ${heading.toFixed(0)} degrees. ${aligned ? "Aligned with Qibla" : ""}`}`}
+            accessibilityLabel={
+              ar
+                ? `اتجاه القبلة ${b.toFixed(1)} درجة من الشمال الحقيقي. ${heading === null ? "اتجاه الجهاز غير متاح" : `اتجاه الجهاز ${heading.toFixed(0)} درجة. ${aligned ? "أنت باتجاه القبلة" : ""}`}`
+                : s.language === "ms"
+                  ? `Kiblat ${b.toFixed(1)} darjah dari utara sebenar. ${heading === null ? "Arah peranti tidak tersedia" : `Arah peranti ${heading.toFixed(0)} darjah. ${aligned ? "Menghadap kiblat" : ""}`}`
+                  : `Qibla ${b.toFixed(1)} degrees from true north. ${heading === null ? "Device heading unavailable" : `Device heading ${heading.toFixed(0)} degrees. ${aligned ? "Aligned with Qibla" : ""}`}`
+            }
             style={{ alignItems: "center" }}
           >
             <Svg width="100%" height={330} viewBox="0 0 320 330">
@@ -54,7 +63,12 @@ export default function Qibla() {
                   transform={`rotate(${i * 5 - (heading || 0)} 160 165)`}
                 />
               ))}
-              {["N", "E", "S", "W"].map((v, i) => (
+              {(ar
+                ? ["شمال", "شرق", "جنوب", "غرب"]
+                : s.language === "ms"
+                  ? ["U", "T", "S", "B"]
+                  : ["N", "E", "S", "W"]
+              ).map((v, i) => (
                 <SvgText
                   key={v}
                   x={
@@ -91,12 +105,16 @@ export default function Qibla() {
                   : "≈ Near Qibla · accuracy unverified"
                 : heading === null
                   ? "Bearing from true north"
-                  : `Turn ${Math.abs(angle).toFixed(0)}° ${angle >= 0 ? "clockwise" : "counterclockwise"}`}
+                  : ar
+                    ? `استدر ${Math.abs(angle).toFixed(0)}° ${angle >= 0 ? "مع عقارب الساعة" : "عكس عقارب الساعة"}`
+                    : `Turn ${Math.abs(angle).toFixed(0)}° ${angle >= 0 ? "clockwise" : "counterclockwise"}`}
             </Txt>
             <Txt color={p.secondaryText}>
               {heading === null
                 ? "North is shown at the top in this fallback view. Align north using a reliable external compass."
-                : `Device heading: ${heading.toFixed(0)}° true north`}
+                : ar
+                  ? `اتجاه الجهاز: ${heading.toFixed(0)}° من الشمال الحقيقي`
+                  : `Device heading: ${heading.toFixed(0)}° true north`}
             </Txt>
             <Button label="Start live compass" onPress={start} />
             <Txt>{message}</Txt>
